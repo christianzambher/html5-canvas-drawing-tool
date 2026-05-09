@@ -1,10 +1,6 @@
 //* =========================
 //* VARIABLES GLOBALES
 //* =========================
-
-let canvas = null;
-let context = null;
-
 let start_background_color = "white";
 
 let offset_x = 0;
@@ -151,19 +147,19 @@ function draw(event) {
                     parseInt(event.clientY - offset_y)
                 );
 
-                context.strokeStyle = draw_color;
+                state.context.strokeStyle = state.drawColor;
 
-                context.lineWidth = draw_width_line;
+                state.context.lineWidth = state.lineWidth;
 
-                context.lineCap =
-                    draw_cap == "" ? "butt" : draw_cap;
+                state.context.lineCap =
+                    state.lineCap == "" ? "butt" : state.lineCap;
 
-                context.lineJoin =
-                    draw_cap == "" ? "butt" : draw_cap;
+                state.context.lineJoin =
+                    state.lineCap == "" ? "butt" : state.lineCap;
 
-                context.fillStyle = draw_color;
+                state.context.fillStyle = state.drawColor;
 
-                context.stroke();
+                state.context.stroke();
             }
         }
     }
@@ -208,24 +204,24 @@ function stop(event) {
                 draw_height
             );
 
-            context.fillStyle = "transparent";
+            state.context.fillStyle = "transparent";
 
-            context.fill();
+            state.context.fill();
 
-            context.lineWidth = draw_width_line;
+            state.context.lineWidth = state.lineWidth;
 
-            context.strokeStyle = draw_color;
+            state.context.strokeStyle = state.drawColor;
 
-            context.stroke();
+            state.context.stroke();
 
             if (event.type != "mouseout") {
 
                 restore_array.push(
-                    context.getImageData(
+                    state.context.getImageData(
                         0,
                         0,
-                        canvas.width,
-                        canvas.height
+                        state.canvas.width,
+                        state.canvas.height
                     )
                 );
 
@@ -235,19 +231,19 @@ function stop(event) {
 
         else if (shape_type == "TX") {
 
-            context.fillStyle = draw_color;
+            state.context.fillStyle = state.drawColor;
 
-            context.font =
-                draw_text_style +
+            state.context.font =
+                state.textStyle +
                 " " +
-                draw_text_size +
+                state.textSize +
                 "px " +
-                draw_text_font;
+                state.textFont;
 
-            context.textAlign = draw_text_aling;
+            state.context.textAlign = state.textAlign;
 
-            context.fillText(
-                draw_text,
+            state.context.fillText(
+                state.drawText,
                 initial_point_X,
                 initial_point_Y
             );
@@ -255,11 +251,11 @@ function stop(event) {
             if (event.type != "mouseout") {
 
                 restore_array.push(
-                    context.getImageData(
+                    state.context.getImageData(
                         0,
                         0,
-                        canvas.width,
-                        canvas.height
+                        state.canvas.width,
+                        state.canvas.height
                     )
                 );
 
@@ -271,20 +267,20 @@ function stop(event) {
 
 function clear_canvas() {
 
-    context.fillStyle = start_background_color;
+    state.context.fillStyle = start_background_color;
 
-    context.clearRect(
+    state.context.clearRect(
         0,
         0,
-        canvas.width,
-        canvas.height
+        state.canvas.width,
+        state.canvas.height
     );
 
-    context.fillRect(
+    state.context.fillRect(
         0,
         0,
-        canvas.width,
-        canvas.height
+        state.canvas.width,
+        state.canvas.height
     );
 
     action = "";

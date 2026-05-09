@@ -1,19 +1,31 @@
 const state = {
-    currentTool: null,
+    canvas: null,
+    context: null,
+
+    action: "",
+    shapeType: "",
+
     isDrawing: false,
 
     startX: 0,
     startY: 0,
 
-    mouseX: 0,
-    mouseY: 0,
+    offsetX: 0,
+    offsetY: 0,
 
-    selectedShape: null,
+    drawColor: "#000000",
+    lineWidth: 2,
+    lineCap: "butt",
 
-    shapes: [],
+    drawWidth: 0,
+    drawHeight: 0,
 
-    history: [],
+    drawText: "",
+    textAlign: "start",
+    textStyle: "",
+    textSize: 16,
+    textFont: "Arial",
 
-    canvas: null,
-    context: null
+    restoreArray: [],
+    restoreIndex: -1
 };
