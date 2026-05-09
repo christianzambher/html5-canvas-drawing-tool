@@ -1,44 +1,4 @@
 //* =========================
-//* VARIABLES GLOBALES
-//* =========================
-let start_background_color = "white";
-
-let offset_x = 0;
-let offset_y = 0;
-
-let draw_width = 0;
-let draw_height = 0;
-
-let draw_color = "#000000";
-
-let draw_width_line = "2";
-
-let draw_cap = "";
-
-let draw_text = "";
-let draw_text_aling = "";
-let draw_text_style = "";
-let draw_text_size = 2;
-let draw_text_font = "";
-
-let draw_width_image = 0;
-let draw_height_image = 0;
-
-let action = "";
-let shape_type = "";
-let is_drawing = false;
-
-let initial_point_X = 0;
-let initial_point_Y = 0;
-
-let width_Square = 0;
-let height_Square = 0;
-
-let restore_array = [];
-let index_restore = -1;
-
-
-//* =========================
 //* INICIALIZACION
 //* =========================
 
@@ -48,53 +8,47 @@ window.addEventListener('DOMContentLoaded', () => {
     state.canvas = document.getElementById('canvas');
     state.context = state.canvas.getContext('2d');
 
-    //* REFERENCIAS
-    canvas = state.canvas;
-    context = state.context;
-
     //* CONFIG CANVAS
-    canvas.width = 1000;
-    canvas.height = 400;
+    state.canvas.width = 1000;
+    state.canvas.height = 400;
 
-    context.fillStyle = start_background_color;
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    state.context.fillStyle = state.backgroundColor;
+    state.context.fillRect(0, 0, state.canvas.width, state.canvas.height);
 
-    canvas.style.border = "2px solid darkgray";
+    state.canvas.style.border = "2px solid darkgray";
 
     //* INPUTS INICIALES
     manage_Inputs("X", 1);
 
-    $("#txtAncho").val(draw_width);
-    $("#txtAlto").val(draw_height);
+    $("#txtAncho").val(state.drawWidth);
+    $("#txtAlto").val(state.drawHeight);
 
-    $("#inpColor").val(draw_color);
+    $("#inpColor").val(state.drawColor);
 
-    $("#inpRango").val(draw_width_line);
-    $("#pGrosor").text(draw_width_line);
+    $("#inpRango").val(state.lineWidth);
+    $("#pGrosor").text(state.lineWidth);
 
-    $("#slctTrazo").val(draw_cap);
+    $("#slctTrazo").val(state.lineCap);
 
-    $("#txtDrawText").val(draw_text);
+    $("#txtDrawText").val(state.drawText);
 
-    $("#slctDrawTextAlign").val(draw_text_aling);
+    $("#slctDrawTextStyle").val(state.textStyle);
 
-    $("#slctDrawTextStyle").val(draw_text_style);
+    $("#txtDrawTextSize").val(state.textSize);
 
-    $("#txtDrawTextSize").val(draw_text_size);
-
-    $("#slctDrawTextFont").val(draw_text_font);
+    $("#slctDrawTextFont").val(state.textFont);
 
     $("#txtAncho_Image").attr("disabled", true);
     $("#txtAlto_Image").attr("disabled", true);
 
     //* OFFSET
-    get_offset();
+    getOffset();
 
     //* EVENTOS CANVAS
-    canvas.addEventListener("mousedown", start, false);
-    canvas.addEventListener("mousemove", draw, false);
-    canvas.addEventListener("mouseup", stop, false);
-    canvas.addEventListener("mouseout", stop, false);
+    state.canvas.addEventListener("mousedown", start, false);
+    state.canvas.addEventListener("mousemove", draw, false);
+    state.canvas.addEventListener("mouseup", stop, false);
+    state.canvas.addEventListener("mouseout", stop, false);
 
 });
 
@@ -103,27 +57,27 @@ window.addEventListener('DOMContentLoaded', () => {
 //* FUNCIONES
 //* =========================
 
-function get_offset() {
+function getOffset() {
 
-    let canvas_offsets = canvas.getBoundingClientRect();
+    let canvas_offsets = state.canvas.getBoundingClientRect();
 
-    offset_x = canvas_offsets.left;
-    offset_y = canvas_offsets.top;
+    state.offset_x = canvas_offsets.left;
+    state.offset_y = canvas_offsets.top;
 }
 
 function start(event) {
 
-    is_drawing = true;
+    state.isDrawing = true;
 
-    context.beginPath();
+    state.context.beginPath();
 
-    context.moveTo(
-        event.clientX - offset_x,
-        event.clientY - offset_y
+    state.context.moveTo(
+        event.clientX - state.offset_x,
+        event.clientY - state.offset_y
     );
 
-    initial_point_X = event.clientX - offset_x;
-    initial_point_Y = event.clientY - offset_y;
+    state.startX = event.clientX - state.offset_x;
+    state.startY = event.clientY - state.offset_y;
 
     event.preventDefault();
 }
@@ -131,20 +85,20 @@ function start(event) {
 function draw(event) {
 
     let coordinates =
-        "x : " + parseInt(event.clientX - offset_x) +
-        ", y : " + parseInt(event.clientY - offset_y);
+        "x : " + Number(event.clientX - state.offset_x) +
+        ", y : " + Number(event.clientY - state.offset_y);
 
     $("#pCoordinates").text(coordinates);
 
-    if (action == "C") {
+    if (state.action === "C") {
 
-        if (is_drawing) {
+        if (state.isDrawing) {
 
-            if (shape_type == "LN") {
+            if (state.shapeType === "LN") {
 
-                context.lineTo(
-                    parseInt(event.clientX - offset_x),
-                    parseInt(event.clientY - offset_y)
+                state.context.lineTo(
+                    Number(event.clientX - state.offset_x),
+                    Number(event.clientY - state.offset_y)
                 );
 
                 state.context.strokeStyle = state.drawColor;
@@ -169,39 +123,39 @@ function draw(event) {
 
 function stop(event) {
 
-    if (is_drawing) {
+    if (state.isDrawing) {
 
-        context.stroke();
-        context.closePath();
+        state.context.stroke();
+        state.context.closePath();
 
-        is_drawing = false;
+        state.isDrawing = false;
 
         event.preventDefault();
 
-        if (shape_type == "LN") {
+        if (state.shapeType === "LN") {
 
-            if (event.type != "mouseout") {
+            if (event.type !== "mouseout") {
 
-                restore_array.push(
-                    context.getImageData(
+                state.restoreArray.push(
+                    state.context.getImageData(
                         0,
                         0,
-                        canvas.width,
-                        canvas.height
+                        state.canvas.width,
+                        state.canvas.height
                     )
                 );
 
-                index_restore += 1;
+                state.restoreIndex += 1;
             }
         }
 
-        else if (shape_type == "SQ") {
+        else if (state.shapeType === "SQ") {
 
-            context.rect(
-                initial_point_X,
-                initial_point_Y,
-                draw_width,
-                draw_height
+            state.context.rect(
+                state.startX,
+                state.startY,
+                state.drawWidth,
+                state.drawHeight
             );
 
             state.context.fillStyle = "transparent";
@@ -216,7 +170,7 @@ function stop(event) {
 
             if (event.type != "mouseout") {
 
-                restore_array.push(
+                state.restoreArray.push(
                     state.context.getImageData(
                         0,
                         0,
@@ -225,11 +179,11 @@ function stop(event) {
                     )
                 );
 
-                index_restore += 1;
+                state.restoreIndex += 1;
             }
         }
 
-        else if (shape_type == "TX") {
+        else if (state.shapeType == "TX") {
 
             state.context.fillStyle = state.drawColor;
 
@@ -244,13 +198,13 @@ function stop(event) {
 
             state.context.fillText(
                 state.drawText,
-                initial_point_X,
-                initial_point_Y
+                state.startX,
+                state.startY
             );
 
             if (event.type != "mouseout") {
 
-                restore_array.push(
+                state.restoreArray.push(
                     state.context.getImageData(
                         0,
                         0,
@@ -259,15 +213,15 @@ function stop(event) {
                     )
                 );
 
-                index_restore += 1;
+                state.restoreIndex += 1;
             }
         }
     }
 }
 
-function clear_canvas() {
+function clearCanvas() {
 
-    state.context.fillStyle = start_background_color;
+    state.context.fillStyle = state.backgroundColor;
 
     state.context.clearRect(
         0,
@@ -283,38 +237,38 @@ function clear_canvas() {
         state.canvas.height
     );
 
-    action = "";
-    shape_type = "";
+    state.action = "";
+    state.shapeType = "";
 
-    is_drawing = false;
+    state.isDrawing = false;
 
-    initial_point_X = 0;
-    initial_point_Y = 0;
+    state.initialPointX = 0;
+    state.initialPointY = 0;
 
-    width_Square = 0;
-    height_Square = 0;
+    state.drawWidth = 0;
+    state.drawHeight = 0;
 
-    canvas.style.cursor = "auto";
+    state.canvas.style.cursor = "auto";
 
-    restore_array = [];
+    state.restoreArray = [];
 
-    index_restore = -1;
+    state.restoreIndex = -1;
 }
 
-function undo_last() {
+function undoLast() {
 
-    if (index_restore <= 0) {
+    if (state.restoreIndex <= 0) {
 
-        clear_canvas();
+        clearCanvas();
 
     } else {
 
-        index_restore -= 1;
+        state.restoreIndex -= 1;
 
-        restore_array.pop();
+        state.restoreArray.pop();
 
-        context.putImageData(
-            restore_array[index_restore],
+        state.context.putImageData(
+            state.restoreArray[state.restoreIndex],
             0,
             0
         );
@@ -322,7 +276,6 @@ function undo_last() {
 }
 
 function manage_Inputs(type, status) {
-
     $("#txtAncho").attr(
         "disabled",
         status == 1 ? true : false
@@ -335,90 +288,106 @@ function manage_Inputs(type, status) {
 //* =========================
 
 $(window).resize(function () {
-    get_offset();
+    getOffset();
 });
 
 $(window).scroll(function () {
-    get_offset();
+    getOffset();
 });
 
 $("#txtAncho").on("change", function () {
-    draw_width = this.value;
+    state.drawWidth = this.value;
 });
 
 $("#txtAlto").on("change", function () {
-    draw_height = this.value;
+    state.drawHeight = this.value;
 });
 
 $("#inpColor").on("change", function () {
-    draw_color = this.value;
+    state.drawColor = this.value;
 });
 
 $("#inpRango").on("change", function () {
 
-    draw_width_line = this.value;
+    state.lineWidth = this.value;
 
     $("#pGrosor").text(this.value);
 });
 
 $("#slctTrazo").on("change", function () {
-    draw_cap = this.value;
+    state.lineCap = this.value;
+});
+
+$("#slctDrawTextAlign").on("change", function () {
+    state.textAlign = this.value;
+});
+
+$("#slctDrawTextStyle").on("change", function () {
+    state.textStyle = this.value;
+});
+
+$("#txtDrawTextSize").on("change", function () {
+    state.textSize = this.value;
+});
+
+$("#slctDrawTextFont").on("change", function () {
+    state.textFont = this.value;
 });
 
 $("#txtDrawText").on("keyup", function () {
-    draw_text = this.value;
+    state.drawText = this.value;
 });
 
 $("#btnDrawCuadro").on("click", function () {
 
-    action = "C";
+    state.action = "C";
 
-    shape_type = "SQ";
+    state.shapeType = "SQ";
 
-    is_drawing = false;
+    state.isDrawing = false;
 
-    canvas.style.cursor = "crosshair";
+    state.canvas.style.cursor = "crosshair";
 
     manage_Inputs("S", 1);
 });
 
 $("#btnDrawLinea").on("click", function () {
 
-    action = "C";
+    state.action = "C";
 
-    shape_type = "LN";
+    state.shapeType = "LN";
 
-    is_drawing = false;
+    state.isDrawing = false;
 
-    canvas.style.cursor = "crosshair";
+    state.canvas.style.cursor = "crosshair";
 
     manage_Inputs("L", 1);
 });
 
 $("#btnDrawTexto").on("click", function () {
 
-    action = "C";
+    state.action = "C";
 
-    shape_type = "TX";
+    state.shapeType = "TX";
 
-    is_drawing = false;
+    state.isDrawing = false;
 
-    canvas.style.cursor = "crosshair";
+    state.canvas.style.cursor = "crosshair";
 
     manage_Inputs("T", 1);
 });
 
 $("#btnClearTodo").on("click", function () {
-    clear_canvas();
+    clearCanvas();
 });
 
 $("#btnUndo").on("click", function () {
-    undo_last();
+    undoLast();
 });
 
 $("#btnSave").on("click", function () {
 
-    canvas.toBlob(blob => {
+    state.canvas.toBlob(blob => {
 
         let anchor = document.createElement("a");
 

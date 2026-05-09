@@ -27,5 +27,7 @@ const state = {
     textFont: "Arial",
 
     restoreArray: [],
-    restoreIndex: -1
+    restoreIndex: -1,
+
+    backgroundColor: "white"
 };
