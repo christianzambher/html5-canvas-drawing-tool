@@ -1,121 +1,104 @@
 # HTML5 Canvas Drawing Tool
 
-Aplicación web desarrollada con HTML5 Canvas y JavaScript puro que permite realizar dibujos y bocetos interactivos directamente desde el navegador.
+Aplicación web desarrollada con HTML5 Canvas y JavaScript para realizar dibujos básicos, agregar texto e interactuar dinámicamente con el canvas.
 
-## 🚀 Características actuales
+Este proyecto comenzó como una práctica de manipulación del elemento `<canvas>` y posteriormente fue refactorizado para mejorar:
+- organización del código
+- separación de responsabilidades
+- manejo de estado
+- mantenibilidad
+- escalabilidad
 
-- Dibujo libre con lápiz
-- Creación de figuras
+---
+
+# Características
+
+- Dibujo libre con líneas
+- Creación de cuadros
 - Inserción de texto
-- Carga de imágenes
-- Configuración de color y grosor
-- Descarga del canvas como imagen
-- Función de deshacer
-- Configuración de estilos de trazo
+- Cambio de color
+- Configuración de grosor
+- Deshacer último cambio
+- Limpiar canvas
+- Exportar dibujo como imagen JPG
+- Manejo dinámico de coordenadas
 
-## 🛠️ Tecnologías utilizadas
+---
 
-- HTML5
-- CSS3
-- JavaScript (Vanilla JS)
-- Bootstrap
-- Font Awesome
-- Canvas API
-
-## 📂 Estructura del proyecto
-
-```text
-assets/
-├── css/
-├── js/
-├── webfonts/
-└── images/
-```
-
-## ▶️ Ejecución local
-
-Clona el repositorio:
-
-```bash
-git clone https://github.com/christianzambher/html5-canvas-drawing-tool.git
-```
-
-Después abre el proyecto en un servidor local.
-
-Ejemplo con XAMPP:
-
-```text
-htdocs/html5-canvas-drawing-tool
-```
-
-Luego accede desde el navegador:
-
-```text
-http://localhost/html5-canvas-drawing-tool
-```
-
-## 🎯 Objetivo del proyecto
-
-Este proyecto fue desarrollado como práctica de manipulación del DOM, renderizado gráfico y manejo de eventos utilizando HTML5 Canvas y JavaScript puro.
-
-Actualmente el proyecto se encuentra en proceso de refactorización para implementar una arquitectura basada en objetos que permita:
-
-- Selección de elementos
-- Movimiento de figuras
-- Mejor manejo del historial
-- Renderizado dinámico
-- Mayor escalabilidad
-
-## 📸 Capturas
-
-Próximamente.
-
-## 📄 Licencia
-
-Proyecto de uso educativo y portafolio personal.
-
-# HTML5 Canvas Drawing Tool
-
-Herramienta de dibujo desarrollada con HTML5 Canvas y JavaScript vanilla.
-
-## Características
-
-- Dibujo libre
-- Creación de rectángulos
-- Inserción de texto
-- Inserción de imágenes
-- Selección de color
-- Configuración de grosor de línea
-- Exportación del canvas como imagen
-- Función de deshacer
-- Coordenadas dinámicas del cursor
-
-## Tecnologías utilizadas
+# Tecnologías utilizadas
 
 - HTML5
 - CSS3
 - JavaScript
 - jQuery
-- Canvas API
+- HTML5 Canvas API
+- Bootstrap
 
-## Objetivo del proyecto
+---
 
-Este proyecto fue desarrollado como práctica para reforzar conocimientos de:
+# Estructura del proyecto
 
-- Manipulación del DOM
-- Eventos del mouse
-- Renderizado con Canvas API
-- Manejo de estado en frontend
-- Gestión de coordenadas y dibujo dinámico
-- Exportación de imágenes desde canvas
-
-## Estructura del proyecto
-
-```plaintext
+```text
 assets/
 ├── css/
+│   └── styles.css
+│
 ├── js/
-└── img/
+│   ├── state.js
+│   ├── renderer.js
+│   ├── canvas.js
+│   ├── ui.js
+│   ├── events.js
+│   └── app.js
+│
+└── images/
+```
 
-index.html
-README.md
+# Arquitectura
+
+El proyecto fue reorganizado utilizando una estructura modular basada en responsabilidades:
+| Archivo       | Responsabilidad                       |
+| ------------- | ------------------------------------- |
+| `state.js`    | Estado global de la aplicación        |
+| `renderer.js` | Renderizado de elementos sobre canvas |
+| `canvas.js`   | Operaciones principales del canvas    |
+| `ui.js`       | Manipulación de interfaz y controles  |
+| `events.js`   | Registro de eventos y listeners       |
+| `app.js`      | Inicialización de la aplicación       |
+
+# Refactor realizado
+## Antes
+* Código monolítico
+* Variables globales dispersas
+* Eventos mezclados con renderizado
+* Dependencias implícitas
+* Baja mantenibilidad
+## Después
+* Estado centralizado
+* Separación de lógica
+* Responsabilidades desacopladas
+* Mejor legibilidad
+* Estructura escalable
+
+# Cómo ejecutar el proyecto
+## Clonar repositorio
+```
+git clone <repository-url>
+```
+## Abrir proyecto
+```
+cd html5-canvas-drawing-tool
+```
+## Ejecutar con servidor local
+Ejemplo usando VSCode Live Server.
+
+# Aprendizajes
+
+Este proyecto permitió practicar:
+* Manipulación del Canvas API
+* Manejo de eventos del navegador
+* Refactorización de código legacy
+* Modularización de JavaScript
+* Organización de proyectos frontend
+* Manejo centralizado de estado
+* Separación de responsabilidades
