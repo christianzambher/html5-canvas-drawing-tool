@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boceto de Proyecto</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/all.css" />
+    <link rel="stylesheet" href="./assets/css/all.min.css" />
+    <script src="./assets/js/jquery-3.6.0.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+</head>
+
+<body class="bg-dark">
+    <div class="container bg-white">
+        <h2>Boceto</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-text">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="shadow-lg p-3 mb-5 rounded">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <label class="form-label"><b>Formas</b></label>
+                                            <div class="col-sm-3">
+                                                <label class="form-label"><b><small>Cuadro</small></b></label>
+                                                <div class="form-group">
+                                                    <button class="btn btn-secondary btn-sm btn-block rounded-0"
+                                                        title="Cuadro" id="btnDrawCuadro"><i
+                                                            class="fas fa-square"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="form-label"><b><small>Lapiz</small></b></label>
+                                                <div class="form-group">
+                                                    <button class="btn btn-secondary btn-sm btn-block rounded-0"
+                                                        title="Linea" id="btnDrawLinea"><i
+                                                            class="fas fa-pen"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="form-label"><b><small>Texto</small></b></label>
+                                                <div class="form-group">
+                                                    <button class="btn btn-secondary btn-sm btn-block rounded-0"
+                                                        title="Texto" id="btnDrawTexto"><i
+                                                            class="fas fa-text-width"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="form-label"><b><small>Imagen</small></b></label>
+                                                <div class="form-group">
+                                                    <button class="btn btn-secondary btn-sm btn-block rounded-0"
+                                                        title="Imagen" id="btnDrawImage"><i
+                                                            class="fas fa-images"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="form-label"><b><small>Limpiar</small></b></label>
+                                                <div class="form-group">
+                                                    <button class="btn  btn-secondary btn-sm btn-block rounded-0"
+                                                        title="Limpiar Todo" id="btnClearTodo"><i
+                                                            class="fas fa-broom"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="form-label"><b><small>Deshacer</small></b></label>
+                                                <div class="form-group">
+                                                    <button class="btn btn-secondary btn-sm btn-block rounded-0"
+                                                        title="Deshacer" id="btnUndo">
+                                                        <i class="fas fa-undo"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="form-label"><b><small>Descargar</small></b></label>
+                                                <div class="form-group">
+                                                    <button class="btn btn-secondary btn-sm btn-block rounded-0"
+                                                        title="Guardar" id="btnSave"><i
+                                                            class="fas fa-download"></i></button>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-sm-4">
+                                                <label class="form-label"><b>Seleccionar</b></label>
+                                                <div class="form-group">
+                                                    <button class="btn btn-secondary btn-sm btn-block rounded-0"
+                                                        title="Seleccionar" id="btnSeleccionar"><i
+                                                            class="fas fa-expand-arrows-alt"></i></button>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="txtAncho" class="form-label"><b>Ancho</b></label>
+                                            <input type="number" id="txtAncho" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtAlto" class="form-label"><b>Alto</b></label>
+                                            <input type="number" id="txtAlto" class="form-control form-control-sm">
+                                        </div>
+                                        <hr>
+                                        <div class="form-group">
+                                            <div class="custom-file">
+                                                <label for="inpImage" class="form-label"><b>Cargar Imagen</b></label>
+                                                <input type="file" class="custom-file-input" id="inpImage">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        id="chckRedimImage">
+                                                    <label class="form-check-label" for="chckRedimImage">
+                                                        Redimensionar Imagen
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="txtAncho_Image"><b>Redim. Ancho</b></label>
+                                                <input type="number" id="txtAncho_Image"
+                                                    class="form-control form-control-sm">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="txtAlto_Image"><b>Redim. Alto</b></label>
+                                                <input type="number" id="txtAlto_Image"
+                                                    class="form-control form-control-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="inpColor" class="form-label"><b>Color</b></label>
+                                            <input type="color" id="inpColor"
+                                                class="form-control form-control-sm form-control-color"
+                                                title="Elige el Color">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inpRango" class="form-label"><b>Grosor de linea</b></label>
+                                            <input type="range" id="inpRango" class="form-range" min="1" max="100">
+                                            <p id="pGrosor"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="slctTrazo"><b>Tipo de trazo</b></label>
+                                            <select id="slctTrazo" class="form-control form-control-sm">
+                                                <option value="">Seleccione el tipo de trazo</option>
+                                                <option value="butt">Default</option>
+                                                <option value="round">Redondeado</option>
+                                                <option value="square">Cuadrado</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="txtDrawText" class="form-label"><b>Texto</b></label>
+                                            <input type="text" id="txtDrawText" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="slctDrawTextAlign"
+                                                        class="form-label"><b>Alineacion</b></label>
+                                                    <select id="slctDrawTextAlign" class="form-control form-control-sm">
+                                                        <option value="">Selecciona una alineacion</option>
+                                                        <option value="start">Inicio</option>
+                                                        <option value="left">Izquierda</option>
+                                                        <option value="right">Derecha</option>
+                                                        <option value="center">Centrado</option>
+                                                        <option value="end">Final</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="slctDrawTextStyle"
+                                                        class="form-label"><b>Estilo</b></label>
+                                                    <select id="slctDrawTextStyle" class="form-control form-control-sm">
+                                                        <option value="">Selecciona un estilo</option>
+                                                        <option value="normal">Normal</option>
+                                                        <option value="bold">Negrita</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label for="txtDrawTextSize"><b>Tamaño</b></label>
+                                                <input type="number" id="txtDrawTextSize"
+                                                    class="form-control form-control-sm">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="slctDrawTextFont"><b>Fuente</b></label>
+                                                <select id="slctDrawTextFont" class="form-control form-control-sm">
+                                                    <option value="">Seleccioone una fuente</option>
+                                                    <option value="Arial">Arial</option>
+                                                    <option value="Tahoma">Tahoma</option>
+                                                    <option value="Consolas">Consolas</option>
+                                                    <option value="sans-serif">Sans Serif</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <p id="pCoordinates"></p>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <hr>
+                                    </div>
+                                    <div class="col-sm-12 d-flex justify-content-center">
+                                        <canvas id="canvas"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./assets/js/app.js"></script>
+</body>
+
+</html>
