@@ -73,3 +73,49 @@ Próximamente.
 ## 📄 Licencia
 
 Proyecto de uso educativo y portafolio personal.
+
+# HTML5 Canvas Drawing Tool
+
+Herramienta de dibujo desarrollada con HTML5 Canvas y JavaScript vanilla.
+
+## Características
+
+- Dibujo libre
+- Creación de rectángulos
+- Inserción de texto
+- Inserción de imágenes
+- Selección de color
+- Configuración de grosor de línea
+- Exportación del canvas como imagen
+- Función de deshacer
+- Coordenadas dinámicas del cursor
+
+## Tecnologías utilizadas
+
+- HTML5
+- CSS3
+- JavaScript
+- jQuery
+- Canvas API
+
+## Objetivo del proyecto
+
+Este proyecto fue desarrollado como práctica para reforzar conocimientos de:
+
+- Manipulación del DOM
+- Eventos del mouse
+- Renderizado con Canvas API
+- Manejo de estado en frontend
+- Gestión de coordenadas y dibujo dinámico
+- Exportación de imágenes desde canvas
+
+## Estructura del proyecto
+
+```plaintext
+assets/
+├── css/
+├── js/
+└── img/
+
+index.html
+README.md
