@@ -72,6 +72,20 @@ $("#btnDrawTexto").on("click", function () {
     manage_Inputs("T", 1);
 });
 
+$("#btnDrawImage").on("click", function () {
+    state.action = "C";
+    state.shapeType = "IM";
+    state.isDrawing = false;
+    state.canvas.style.cursor = "crosshair";
+    manage_Inputs("I", 1);
+});
+
+$("#chckRedimImage").on("change", function () {
+    let checked = $(this).is(":checked");
+    $("#txtAncho_Image").attr("disabled", !checked);
+    $("#txtAlto_Image").attr("disabled", !checked);
+});
+
 $("#btnClearTodo").on("click", function () {
     clearCanvas();
 });

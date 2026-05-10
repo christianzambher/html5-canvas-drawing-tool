@@ -66,19 +66,17 @@ El proyecto fue reorganizado utilizando una estructura modular basada en respons
 | `events.js`   | Registro de eventos y listeners       |
 | `app.js`      | Inicialización de la aplicación       |
 
-# Refactor realizado
-## Antes
-* Código monolítico
-* Variables globales dispersas
-* Eventos mezclados con renderizado
-* Dependencias implícitas
-* Baja mantenibilidad
-## Después
-* Estado centralizado
-* Separación de lógica
-* Responsabilidades desacopladas
-* Mejor legibilidad
-* Estructura escalable
+## Refactorización reciente
+
+Se realizó una reorganización completa del frontend JavaScript para mejorar:
+
+- Separación de responsabilidades
+- Mantenibilidad del código
+- Manejo de estado centralizado
+- Modularización de eventos y renderizado
+- Corrección de errores relacionados con canvas null/context null
+- Restauración del flujo de renderizado de imágenes
+- Mejora de comportamiento responsive
 
 # Cómo ejecutar el proyecto
 ## Clonar repositorio

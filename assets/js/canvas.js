@@ -71,7 +71,6 @@ function draw(event) {
 }
 
 function stop(event) {
-
     if (state.isDrawing) {
 
         state.context.stroke();
@@ -163,6 +162,68 @@ function stop(event) {
                 );
 
                 state.restoreIndex += 1;
+            }
+        }
+
+        else if (state.shapeType == "IM") {
+
+            if ($("#inpImage")[0].files.length > 0) {
+
+                let file = $("#inpImage")[0].files[0];
+
+                let reader = new FileReader();
+
+                reader.readAsDataURL(file);
+
+                reader.onload = function (e) {
+
+                    let image = new Image();
+
+                    image.src = e.target.result;
+
+                    image.onload = function () {
+
+                        //* REDIMENSIONAR
+                        if ($("#chckRedimImage").is(":checked")) {
+
+                            let width = $("#txtAncho_Image").val();
+
+                            let height = $("#txtAlto_Image").val();
+
+                            state.context.drawImage(
+                                image,
+                                state.startX,
+                                state.startY,
+                                width,
+                                height
+                            );
+
+                        } else {
+
+                            //* TAMAÑO ORIGINAL
+                            state.context.drawImage(
+                                image,
+                                state.startX,
+                                state.startY
+                            );
+                        }
+
+                        //* RESTORE
+                        if (event.type != "mouseout") {
+
+                            state.restoreArray.push(
+                                state.context.getImageData(
+                                    0,
+                                    0,
+                                    state.canvas.width,
+                                    state.canvas.height
+                                )
+                            );
+
+                            state.restoreIndex += 1;
+                        }
+                    };
+                };
             }
         }
     }
