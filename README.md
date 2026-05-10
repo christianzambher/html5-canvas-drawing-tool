@@ -11,6 +11,14 @@ Este proyecto comenzó como una práctica de manipulación del elemento `<canvas
 
 ---
 
+## Demo
+
+Demo pública del proyecto:
+- GitHub Pages:
+https://christianzambher.github.io/html5-canvas-drawing-tool/
+
+---
+
 # Características
 
 - Dibujo libre con líneas
